@@ -1,6 +1,6 @@
 {
-  "name": "심플 플래시카드",
-  "description": "다크 테마 기반의 깔끔하고 심플한 학습용 플래시카드 앱입니다.",
+  "name": "문제풀이 카드",
+  "description": "과목별 핵심 포인트를 카드 형태로 학습하고 퀴즈를 풀 수 있는 오프라인 최적화 문제풀이 앱입니다.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
