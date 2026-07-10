@@ -46,7 +46,7 @@ export default function App() {
 
   // Sub-subjects (Categories like 1과목, 2과목, etc.)
   const [subSubjects, setSubSubjects] = useState<SubSubject[]>(() => {
-    const cached = localStorage.getItem('custom_sub_subjects_v2');
+    const cached = localStorage.getItem('custom_sub_subjects_v4');
     if (cached) {
       try {
         return JSON.parse(cached);
@@ -63,14 +63,12 @@ export default function App() {
       { id: 12, parentSubjectId: 10, label: '2과목', title: '데이터 처리 기술 이해' },
       { id: 13, parentSubjectId: 10, label: '3과목', title: '데이터 분석 기획' },
       { id: 14, parentSubjectId: 10, label: '4과목', title: '데이터 분석' },
-      { id: 15, parentSubjectId: 10, label: '5과목', title: '데이터 시각화' },
-      { id: 16, parentSubjectId: 10, label: '모의고사', title: '모의고사' },
-      { id: 17, parentSubjectId: 10, label: '기출문제', title: '기출문제' }
+      { id: 15, parentSubjectId: 10, label: '5과목', title: '데이터 시각화' }
     ];
   });
 
   const [subjectsList, setSubjectsList] = useState<any[]>(() => {
-    const cached = localStorage.getItem('custom_quiz_subjects_v2');
+    const cached = localStorage.getItem('custom_quiz_subjects_v4');
     if (cached) {
       try {
         return JSON.parse(cached);
@@ -376,7 +374,7 @@ export default function App() {
     };
     const updated = [...subSubjects, newSub];
     setSubSubjects(updated);
-    localStorage.setItem('custom_sub_subjects_v2', JSON.stringify(updated));
+    localStorage.setItem('custom_sub_subjects_v4', JSON.stringify(updated));
     setSelectedSubject(newId);
     setActiveIndex(0);
     setIsAddCategoryModalOpen(false);
@@ -397,7 +395,7 @@ export default function App() {
     };
     const updated = [...subjectsList, newSub];
     setSubjectsList(updated);
-    localStorage.setItem('custom_quiz_subjects_v2', JSON.stringify(updated));
+    localStorage.setItem('custom_quiz_subjects_v4', JSON.stringify(updated));
     
     setSelectedSubject(newId);
     setActiveIndex(0);
@@ -413,7 +411,7 @@ export default function App() {
       onConfirm: () => {
         const updatedSubjects = subjectsList.filter(s => s.id !== subId);
         setSubjectsList(updatedSubjects);
-        localStorage.setItem('custom_quiz_subjects_v2', JSON.stringify(updatedSubjects));
+        localStorage.setItem('custom_quiz_subjects_v4', JSON.stringify(updatedSubjects));
 
         const updatedQuestions = questions.filter(q => q.subject !== subId);
         setQuestions(updatedQuestions);
