@@ -434,7 +434,7 @@ export const ADP_SUBJECT2_QUESTIONS: Question[] = [
       "클러스터에 참여하는 노드(SQL 노드, 데이터 노드, 매니저를 포함) 수는 255로 제한한다. 데이터 노드는 최대 48개까지만 가능하다."
     ],
     "answer": "1",
-    "explanation": "MySQL 클러스터는 운영 중에 실시간으로 노드를 온라인 추가/삭제할 수 있는 뛰어난 동적 확장성을 가지고 있다."
+    "explanation": "MySQL 클러스터는 운영 중에 실시간으로 노드를 추가/삭제할 수 없다."
   },
   {
     "id": "adp-2-mc-2-10",
@@ -742,8 +742,7 @@ export const ADP_SUBJECT2_QUESTIONS: Question[] = [
     "subjectTitle": "데이터 처리 기술 이해",
     "type": "subjective",
     "question": "( 가 )에 들어갈 용어는 무엇인가?\n\n관계형 데이터베이스에서 ( 가 )는 레코드와 유사한 개념으로 하나의 ( 가 )는 여러 개의 property를 가질 수 있으며, property는 name-value 쌍으로 저장된다.",
-    "answer": "튜플 (Tuple)",
-    "explanation": "MySQL Cluster는 비공유 아키텍처를 기반으로 고가용성과 실시간 응답성을 제공하며, 단일 장애점(SPOF) 없이 무중단 서비스를 지원하는 인메모리 기반 분산 데이터베이스 시스템입니다."
+    "answer": "튜플 (Tuple)"
   },
   {
     "id": "adp-2-subj-17",
@@ -759,8 +758,7 @@ export const ADP_SUBJECT2_QUESTIONS: Question[] = [
     "subjectTitle": "데이터 처리 기술 이해",
     "type": "subjective",
     "question": "( 가 )에 들어갈 용어는 무엇인가?\n\n( 가 ) 기반의 가상화는 호스트 운영체제 위에 가상의 운영체제를 구성하기 위한 운영 환경 계층을 추가하여 운영체제만을 가상화한 방식으로, 가상화 수준이 낮기 때문에 다른 방식에 비해서 빠른 성능을 보인다는 장점이 있다.",
-    "answer": "컨테이너 (Container)",
-    "explanation": "MySQL Cluster는 비공유 아키텍처를 기반으로 고가용성과 실시간 응답성을 제공하며, 단일 장애점(SPOF) 없이 무중단 서비스를 지원하는 인메모리 기반 분산 데이터베이스 시스템입니다."
+    "answer": "컨테이너 (Container)"
   },
   {
     "id": "adp-2-subj-19",
