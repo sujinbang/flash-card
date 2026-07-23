@@ -199,10 +199,10 @@ export const ADP_SUBJECT4_QUESTIONS: Question[] = [
     "answer": "2",
     "explanation": "R에서 결측치(`NA`)와의 비교 연산(`==`)은 무조건 `NA`를 반환하므로, ③의 결과는 `NA NA NA NA`가 된다. ①, ②, ④의 결과는 `FALSE FALSE FALSE TRUE`이다.",
     "options": [
-      "",
-      "",
-      "",
-      ""
+      "z=c(1:3, NA)\nis.na(z)",
+      "z<-c(1:3, NA)\nis.na(z)",
+      "z=c(1:3, NA)\nz==NA",
+      "c(1,1,1,2)==2"
     ]
   },
   {
