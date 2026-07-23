@@ -22,7 +22,8 @@ import {
   Layers,
   Home,
   Shield,
-  Lock
+  Lock,
+  BarChart2
 } from 'lucide-react';
 import { Question, QuizProgress, SubSubject } from './types';
 import { PRESEEDED_QUESTIONS } from './data/questions';
@@ -35,8 +36,8 @@ export default function App() {
   const [questions, setQuestions] = useState<Question[]>([]);
   // Left Sidebar state
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState<boolean>(false);
-  // Current category / subject (0 = 전체, 1 = 1과목, 2 = 2과목, 3 = 3과목, 4 = 4과목)
-  const [selectedSubject, setSelectedSubject] = useState<number>(0);
+  // Current category / subject
+  const [selectedSubject, setSelectedSubject] = useState<number>(10);
   // Active index inside the filtered question list
   const [activeIndex, setActiveIndex] = useState<number>(0);
   // Slide transition direction
@@ -46,7 +47,7 @@ export default function App() {
 
   // Sub-subjects (Categories like 1과목, 2과목, etc.)
   const [subSubjects, setSubSubjects] = useState<SubSubject[]>(() => {
-    const cached = localStorage.getItem('custom_sub_subjects_v4');
+    const cached = localStorage.getItem('custom_sub_subjects_v6');
     if (cached) {
       try {
         return JSON.parse(cached);
@@ -55,20 +56,15 @@ export default function App() {
       }
     }
     return [
-      { id: 1, parentSubjectId: 0, label: '1과목', title: '소프트웨어 설계' },
-      { id: 2, parentSubjectId: 0, label: '2과목', title: '소프트웨어 개발' },
-      { id: 3, parentSubjectId: 0, label: '3과목', title: '데이터베이스 구축' },
-      { id: 4, parentSubjectId: 0, label: '4과목', title: '프로그래밍 언어 활용' },
       { id: 11, parentSubjectId: 10, label: '1과목', title: '데이터의 이해' },
       { id: 12, parentSubjectId: 10, label: '2과목', title: '데이터 처리 기술 이해' },
       { id: 13, parentSubjectId: 10, label: '3과목', title: '데이터 분석 기획' },
-      { id: 14, parentSubjectId: 10, label: '4과목', title: '데이터 분석' },
       { id: 15, parentSubjectId: 10, label: '5과목', title: '데이터 시각화' }
     ];
   });
 
   const [subjectsList, setSubjectsList] = useState<any[]>(() => {
-    const cached = localStorage.getItem('custom_quiz_subjects_v4');
+    const cached = localStorage.getItem('custom_quiz_subjects_v6');
     if (cached) {
       try {
         return JSON.parse(cached);
@@ -77,27 +73,19 @@ export default function App() {
       }
     }
     return [
-      {
-        id: 0,
-        label: '빅데이터 분석기사',
-        desc: '1과목부터 4과목까지 전체 기출 핵심 이론과 엄선된 문제를 한 번에 통합 학습합니다.',
-        iconName: 'BookOpen',
-        badge: '기출 전체',
-      },
-      {
-        id: 5,
-        label: '정보보안기사',
-        desc: '정보보안 및 네트워크, 시스템, 애플리케이션 보안 핵심 이론 및 기출 문제를 집중 학습합니다.',
-        iconName: 'Shield',
-        badge: '필수 과목',
-        isCustom: true
-      },
       {
         id: 10,
         label: 'ADP (데이터분석 전문가)',
         desc: '데이터 이해부터 분석, 시각화까지 5과목 전체와 모의고사, 기출문제를 완벽하게 대비합니다.',
         iconName: 'Database',
         badge: '전문가',
+      },
+      {
+        id: 14,
+        label: 'ADP 4과목 (데이터 분석)',
+        desc: 'ADP 4과목인 데이터 분석의 방대한 내용을 집중적으로 분리하여 학습합니다.',
+        iconName: 'BarChart2',
+        badge: '집중 과목'
       }
     ];
   });
@@ -112,7 +100,7 @@ export default function App() {
       if (parent) return parent;
     }
     
-    return subjectsList[0] || { id: 0, label: '빅데이터 분석기사' };
+    return subjectsList[0] || { id: 10, label: 'ADP (데이터분석 전문가)' };
   };
 
   const isQuestionInSubject = (question: Question, subjectId: number) => {
@@ -317,7 +305,7 @@ export default function App() {
       onConfirm: () => {
         localStorage.removeItem('custom_quiz_questions');
         setQuestions(PRESEEDED_QUESTIONS);
-        setSelectedSubject(0);
+        setSelectedSubject(10);
         setTypeFilter('all');
         setActiveIndex(0);
         setConfirmModal(prev => ({ ...prev, isOpen: false }));
@@ -335,6 +323,7 @@ export default function App() {
     Sparkles,
     HelpCircle,
     FileText,
+    BarChart2,
   };
 
 
@@ -374,7 +363,7 @@ export default function App() {
     };
     const updated = [...subSubjects, newSub];
     setSubSubjects(updated);
-    localStorage.setItem('custom_sub_subjects_v4', JSON.stringify(updated));
+    localStorage.setItem('custom_sub_subjects_v6', JSON.stringify(updated));
     setSelectedSubject(newId);
     setActiveIndex(0);
     setIsAddCategoryModalOpen(false);
@@ -395,7 +384,7 @@ export default function App() {
     };
     const updated = [...subjectsList, newSub];
     setSubjectsList(updated);
-    localStorage.setItem('custom_quiz_subjects_v4', JSON.stringify(updated));
+    localStorage.setItem('custom_quiz_subjects_v6', JSON.stringify(updated));
     
     setSelectedSubject(newId);
     setActiveIndex(0);
@@ -411,14 +400,14 @@ export default function App() {
       onConfirm: () => {
         const updatedSubjects = subjectsList.filter(s => s.id !== subId);
         setSubjectsList(updatedSubjects);
-        localStorage.setItem('custom_quiz_subjects_v4', JSON.stringify(updatedSubjects));
+        localStorage.setItem('custom_quiz_subjects_v6', JSON.stringify(updatedSubjects));
 
         const updatedQuestions = questions.filter(q => q.subject !== subId);
         setQuestions(updatedQuestions);
         localStorage.setItem('custom_quiz_questions', JSON.stringify(updatedQuestions.filter(q => q.isCustom)));
 
         if (selectedSubject === subId) {
-          setSelectedSubject(0);
+          setSelectedSubject(10);
           setActiveIndex(0);
         }
         
